@@ -11,23 +11,15 @@ class Cat
 
   def eats_at
     if @meal_time < 12
-      puts @meal_time + "AM"
+      eats = "#{@meal_time} AM"
     else
-      puts @meal_time + "PM"
+      eats = "#{@meal_time} PM"
     end
+    return eats
   end
 
   def meow
-    meal_time = []
-    if @meal_time <= 12
-      meal_time.push(@meal_time, "AM")
-      am = meal_time.join(' ')
-    else
-      pmtime = @meal_time - 12
-      meal_time.push(pmtime, "PM")
-      am = meal_time.join(' ')
-    end
-    puts "My name is " + @name + " and I eat " + @preferred_food + " at #{am}"
+    puts "My name is " + @name + " and I eat " + @preferred_food + " at #{eats_at}"
   end
 
 end
