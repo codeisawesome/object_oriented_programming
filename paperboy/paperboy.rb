@@ -55,6 +55,10 @@ class Paperboy
   # end
 
   def deliver(start_address, end_address)
+    papertotal = 0
+
+
+
     if @side == "even"
       (start_address..end_address).each do |x|
         if x.even?
@@ -69,16 +73,15 @@ class Paperboy
       end
     end
 
-    if papertotal > @quota && @experience == 0
-      @earnings = 12.5 + (( papertotal - 50) * 0.5)
-      @daypay = 12.5 + (( papertotal - 50) * 0.5)
-    elsif papertotal > @quota
-      @daypay = @quota * 0.25 + (( papertotal - @quota) * 0.5)
+    if papertotal > quota
+      @daypay = quota * 0.25 + (( papertotal - quota) * 0.5)
       @earnings += @daypay
     else
-      daypay = papertotal*0.25 - 2
-      @earnings += daypay
+      @daypay = papertotal*0.25
+      @earnings += @daypay - 2
     end
+    @experience += papertotal
+    return @daypay
   end
 
   def report
@@ -86,3 +89,17 @@ class Paperboy
   end
 
 end
+
+
+
+tommy = Paperboy.new("Tommy", "even")
+
+puts tommy.quota # => 50
+puts tommy.deliver(101, 220) # => 17.5
+puts tommy.earnings #=> 17.5
+tommy.report # => "I'm Tommy, I've delivered 60 papers and I've earned $17.5 so far!"
+
+#puts tommy.quota # => 80
+puts tommy.deliver(1, 150) # => 18.75
+puts tommy.earnings #=> 34.25
+puts tommy.report # => "I'm Tommy, I've been delivered 135 papers and I've earned $34.25 so far!"
