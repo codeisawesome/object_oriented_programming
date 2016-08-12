@@ -13,8 +13,8 @@
 
 class Rover
   def initialize(x, y, dir)
-    @x = x
-    @y = y
+    @x = x.to_i
+    @y = y.to_i
     @dir = dir
   end
 
@@ -62,11 +62,28 @@ class Rover
     end
   end
 
+  def rov_location
+    puts "Rover1 is at #{@x},#{@y} and facing #{@dir}"
+  end
+
 end
 
-puts "Please enter the position of the first rover1 ex: 1 2 N"
-rover1pos = gets.chomp
-rover1pos_format = rover1pos.
-rover1 = Rover.new(0,0,"N")
+
+# User input section
+puts "Rover1 start position?(ex: 1 2 N):"
+pos1 = gets.chomp.split
+
+puts "Enter moving instructions for Rover1 (ex: LMLMLMLMM):"
+mov1 = gets.chomp
+
+puts "Rover2 start position?(ex: 3 3 E):"
+pos2 = gets.chomp.split
+
+puts "Rover 2 start position?(ex: 1 2 N):"
+mov2 = gets.chomp
+
+
+# rover1 = Rover.new(1,2,"N")
+rover1 = Rover.new(*pos1)
 rover1.instructions("LMRMLRM")
-rover1
+rover1.rov_location
