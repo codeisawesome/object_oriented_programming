@@ -63,7 +63,7 @@ class Rover
   end
 
   def rov_location
-    puts "Rover1 is at #{@x},#{@y} and facing #{@dir}"
+    puts "#{@x} #{@y} #{@dir}"
   end
 
 end
@@ -79,11 +79,14 @@ mov1 = gets.chomp
 puts "Rover2 start position?(ex: 3 3 E):"
 pos2 = gets.chomp.split
 
-puts "Rover 2 start position?(ex: 1 2 N):"
+puts "Enter moving instructions for Rover1 (ex: MMRMMRMRRM):"
 mov2 = gets.chomp
 
 
-# rover1 = Rover.new(1,2,"N")
+# output for location
 rover1 = Rover.new(*pos1)
-rover1.instructions("LMRMLRM")
+rover2 = Rover.new(*pos2)
+rover1.instructions(mov1)
+rover2.instructions(mov2)
 rover1.rov_location
+rover2.rov_location
