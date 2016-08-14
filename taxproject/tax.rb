@@ -6,13 +6,13 @@ class Item
     @quantity = quantity.to_i
     @name = name.to_s
     @base_price = base_price.to_f
-
   end
 
 end
 
 
 class Cash_register
+
 
   attr_accessor :shopping_cart, :subtotal, :tax, :total
   def initialize
@@ -45,10 +45,8 @@ class Cash_register
         @tax += x.quantity * x.base_price * 0.10
       end
     end
-
+    @total += @tax
     puts "Sales Taxes: " + rounding(@tax)
-    # @total += y.to_f
-    # puts "Sales Tax: #{@total}"
   end
 
 # This method calculates the subtotal
@@ -60,65 +58,14 @@ class Cash_register
     puts "Total: " + rounding(@total)
   end
 
-# # This method calculates the total
-#   def total
-#      @total = @subtotal.to_f + @tax.to_f
-#     #  rounding(@total)
-#   end
-
-# this Prints out an receipt
+# This method prints out a receipt
   def receipt
-
     @shopping_cart.each do |x|
       str_pt_1 = [x.quantity, x.name]*" " + ":"
       str_pt_2 = x.base_price.to_s
       puts str_pt_1 + " " + str_pt_2
     end
-
     s = self.tax #don't know how to run method to self without returning a value to console
     t = self.total
-    # w = self.total
-
-    # puts "cat"
-    # puts "#{@tax}"
-    # puts @total
-
-    # puts self.tax
-    # puts self.subtotal
-    # puts self.total
-
-    # @tax = rounding(x)
-    # @subtotal = rounding(y)
-    # @total = rounding(z)
-
   end
-
 end
-
-
-# Creating cash_register
-# cash_register = Cash_register.new
-
-
-
-
-# book = Item.new(1, "book", 12.49) #quantity, name, import, exempt, base_price
-# music_CD = Item.new(1, "music CD", 14.99)
-# chocolate_bar = Item.new(1, "chocolate bar", 0.85)
-
-
-# cash_register.add_item(book)
-# cash_register.add_item(music_CD)
-# cash_register.add_item(chocolate_bar)
-
-
-# outputting the results of the shopping list
-# ObjectSpace.each_object(Cash_register) {|x| p x}
-# ObjectSpace.each_object(Item) {|x| p x}
-
-
-# cash_register.subtotal
-#
-# cash_register.tax
-#
-# cash_register.total
