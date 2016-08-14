@@ -1,23 +1,16 @@
 # require_relative 'tax'
 
-
 # Shopping list
 puts "Please input what you'd like to buy (ex: 1 book at 12.49), enter 'end' when done:"
-
-  # def convert_user_input(array)
-  #   array.each do |x|
-  #     quantityname = x.split(" at ")
-  #     quantity_name = quantityname[0]
-  #     puts quantity_name.split(' ', 2)
-  #   end
-  # end
 
 user_input_array = Array.new
 input = gets.chomp
 
 while input != "end"
   user_input_array << input
-  "Please input what you'd like to buy (ex: 1 book at 12.49), press enter if done:"
+  puts "Please input what you'd like to buy,"
+  puts "eg: 1 book at 12.49;"
+  puts "eg: 2 imported music CD at press enter if done:"
   input = gets.chomp
 end
 
@@ -35,38 +28,13 @@ end
 
 quantity_and_name(user_input_array)
 
-#       end
-#     break
-#   else
-#     user_input_array = []
-#     if user_input_array != []
-#       user_input_array << user_input
-#     else
-#       user_input_array
-#     puts "Please input what you'd like to buy, press enter if done:"
-#   end
-#
-# end
+i = 0
+
+while i <= user_input_array
+  item
 
 
-    # puts convert_array
-
-    #   convert_user_input(convert_array)
-    #
-    # while user_input != ''
-    #   if user_input == ""
-    #   convert_array (&method (:convert_user_input)
-
-
-# array = Array.new
-#
-# while yn ! "end"
-#   array << gets.chomp
-
-
-
-
-## Testing to see how it would work for convert_user_input
+## Testing to see how it would work to split strings
 # array = []
 # x = "1 imported book at 12.49"
 # y = x.split(" at ")[0].split(' ', 2)

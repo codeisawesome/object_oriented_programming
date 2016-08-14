@@ -2,13 +2,11 @@ class Item
   # class << self; attr_accessor :all end
   # @@all = []
 
-  attr_reader :import, :exempt, :base_price
+  attr_reader :name, :quantity, :base_price
 
-  def initialize(quantity, name, import, exempt, base_price)
+  def initialize(quantity, name, base_price)
     @quantity = quantity.to_i
-    @name = name
-    @import = import
-    @exempt = exempt
+    @name = name.to_s
     @base_price = base_price.to_f
     # @@all << self
   end
@@ -36,10 +34,10 @@ class Cash_register
 
   def tax
     @shopping_cart.each do |x|
-      if x.import
+      if (x.name).include?("imported")
         @tax += x.base_price * 0.05
       end
-      unless x.exempt
+      unless (x.name).include?("bar") || x.name.include?("box")
         @tax += x.base_price * 0.10
       end
     end
@@ -64,30 +62,12 @@ end
 # Creating cash_register
 cash_register = Cash_register.new
 
-# Shopping list
-# puts "Please input what you'd like to buy (ex: 1 book at 12.49), press enter if done:"
-#
-#   def convert_user_input(array)
-#     array.each do |x|
-#       x.split("at")
-#
-#
-#
-#
-#   while user_input = gets.chomp
-#     if user_input == ""
-#       break
-#     else
-#       magic_machine << user_input.split("at")
-#
-#       puts "Please input what you'd like to buy, press enter if done:"
-#     end
-#   end
 
 
-book = Item.new(1, book, false, true, 12.49) #quantity, name, import, exempt, base_price
-music_CD = Item.new(1, music_CD, false, false, 14.99)
-chocolate_bar = Item.new(1, chocolate_bar, false, true, 0.85)
+
+book = Item.new(1, "book", 12.49) #quantity, name, import, exempt, base_price
+music_CD = Item.new(1, "music CD", 14.99)
+chocolate_bar = Item.new(1, "chocolate bar", 0.85)
 
 
 cash_register.add_item(book)
@@ -97,7 +77,8 @@ cash_register.add_item(chocolate_bar)
 
 # outputting the results of the shopping list
 # ObjectSpace.each_object(Cash_register) {|x| p x}
-ObjectSpace.each_object(Item) {|x| p x}
+# ObjectSpace.each_object(Item) {|x| p x}
+
 
 cash_register.subtotal
 
