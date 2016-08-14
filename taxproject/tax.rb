@@ -2,7 +2,7 @@ class Item
   # class << self; attr_accessor :all end
   # @@all = []
 
-  attr_reader :name, :quantity, :base_price
+  attr_accessor :name, :quantity, :base_price
 
   def initialize(quantity, name, base_price)
     @quantity = quantity.to_i
@@ -60,19 +60,19 @@ end
 
 
 # Creating cash_register
-cash_register = Cash_register.new
+# cash_register = Cash_register.new
 
 
 
 
-book = Item.new(1, "book", 12.49) #quantity, name, import, exempt, base_price
-music_CD = Item.new(1, "music CD", 14.99)
-chocolate_bar = Item.new(1, "chocolate bar", 0.85)
+# book = Item.new(1, "book", 12.49) #quantity, name, import, exempt, base_price
+# music_CD = Item.new(1, "music CD", 14.99)
+# chocolate_bar = Item.new(1, "chocolate bar", 0.85)
 
 
-cash_register.add_item(book)
-cash_register.add_item(music_CD)
-cash_register.add_item(chocolate_bar)
+# cash_register.add_item(book)
+# cash_register.add_item(music_CD)
+# cash_register.add_item(chocolate_bar)
 
 
 # outputting the results of the shopping list
@@ -80,8 +80,8 @@ cash_register.add_item(chocolate_bar)
 # ObjectSpace.each_object(Item) {|x| p x}
 
 
-cash_register.subtotal
-
-cash_register.tax
-
-cash_register.total
+# cash_register.subtotal
+#
+# cash_register.tax
+#
+# cash_register.total
