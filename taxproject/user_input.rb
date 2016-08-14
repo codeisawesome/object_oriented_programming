@@ -45,7 +45,7 @@ end
 # puts array_of_item_instances.length
 
 while i < array_of_item_instances.length
-  cash_register.add_item(array_of_item_instances[i])
+  cash_register.add_item(array_of_item_instances[i]) #adding item to the shopping_cart
   i += 1
 end
 
@@ -57,11 +57,11 @@ end
 
 cash_register.receipt
 
-cash_register.subtotal
-
-cash_register.tax
-
-cash_register.total
+# cash_register.subtotal
+#
+# cash_register.tax
+#
+# cash_register.total
 
 
 ## Testing to see how it would work to split strings

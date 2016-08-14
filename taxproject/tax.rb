@@ -17,10 +17,10 @@ class Cash_register
   attr_accessor :shopping_cart, :subtotal, :tax, :total
   def initialize
     @shopping_cart = []
-    @subtotal = 0
-    @tax = 0
-    @rounded_amount = 0
-    @total = 0
+    @subtotal = 0.00
+    @tax = 0.00
+    @rounded_amount = 0.00
+    @total = 0.00
   end
 
 # This method each item into the array @shopping_cart
@@ -30,8 +30,9 @@ class Cash_register
 
 # This method rounds up amounts to nearest 0.05
   def rounding(x)
-    @rounded_amount = (x * 20).ceil / 20.0
-    puts "$" + sprintf('%.2f', @rounded_amount)
+    x = (x * 20).ceil / 20.0
+    x = "$" + sprintf('%.2f', x)
+    x
   end
 
 # This method calculates tax depending on if the word imported, bar or box are prsent
@@ -44,46 +45,52 @@ class Cash_register
         @tax += x.quantity * x.base_price * 0.10
       end
     end
-    # rounding(@tax)
+
+    puts "Sales Taxes: " + rounding(@tax)
+    # @total += y.to_f
+    # puts "Sales Tax: #{@total}"
   end
 
 # This method calculates the subtotal
-  def subtotal
+  def total
     @shopping_cart.each do |x|
       @subtotal += x.base_price * x.quantity
     end
-    # rounding(@subtotal)
+    @total += @subtotal
+    puts "Total: " + rounding(@total)
   end
 
-# This method calculates the total
-  def total
-     @total = @subtotal + @tax
-    #  rounding(@total)
-  end
+# # This method calculates the total
+#   def total
+#      @total = @subtotal.to_f + @tax.to_f
+#     #  rounding(@total)
+#   end
 
 # this Prints out an receipt
   def receipt
 
     @shopping_cart.each do |x|
-      y = [x.quantity, x.name]*" " + ":"
-      z = x.base_price.to_s
-      puts y + " " + z
+      str_pt_1 = [x.quantity, x.name]*" " + ":"
+      str_pt_2 = x.base_price.to_s
+      puts str_pt_1 + " " + str_pt_2
     end
 
-    x = self.tax
-    y = self.subtotal
-    z = self.total
+    s = self.tax #don't know how to run method to self without returning a value to console
+    t = self.total
+    # w = self.total
 
-    puts x
-    puts y
-    puts z
+    # puts "cat"
+    # puts "#{@tax}"
+    # puts @total
+
+    # puts self.tax
+    # puts self.subtotal
+    # puts self.total
 
     # @tax = rounding(x)
     # @subtotal = rounding(y)
     # @total = rounding(z)
 
-    puts "Sales Taxes: #{@tax}"
-    puts "Total: #{@total}"
   end
 
 end
