@@ -55,6 +55,7 @@ end
 # 1 chocolate bar at 23.54
 # 3 imported wine at 24.56
 
+cash_register.receipt
 
 cash_register.subtotal
 

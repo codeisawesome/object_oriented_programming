@@ -14,12 +14,13 @@ end
 
 class Cash_register
 
-  attr_accessor :shopping_cart, :subtotal, :tax 
+  attr_accessor :shopping_cart, :subtotal, :tax, :total
   def initialize
     @shopping_cart = []
     @subtotal = 0
     @tax = 0
     @rounded_amount = 0
+    @total = 0
   end
 
 # This method each item into the array @shopping_cart
@@ -37,27 +38,52 @@ class Cash_register
   def tax
     @shopping_cart.each do |x|
       if (x.name).include?("imported")
-        @tax += x.base_price * 0.05
+        @tax += x.quantity * x.base_price * 0.05
       end
       unless (x.name).include?("bar") || x.name.include?("box")
-        @tax += x.base_price * 0.10
+        @tax += x.quantity * x.base_price * 0.10
       end
     end
-    rounding(@tax)
+    # rounding(@tax)
   end
 
 # This method calculates the subtotal
   def subtotal
     @shopping_cart.each do |x|
-      @subtotal += x.base_price
+      @subtotal += x.base_price * x.quantity
     end
-    rounding(@subtotal)
+    # rounding(@subtotal)
   end
 
 # This method calculates the total
   def total
-     total = @subtotal + @tax
-     rounding(total)
+     @total = @subtotal + @tax
+    #  rounding(@total)
+  end
+
+# this Prints out an receipt
+  def receipt
+
+    @shopping_cart.each do |x|
+      y = [x.quantity, x.name]*" " + ":"
+      z = x.base_price.to_s
+      puts y + " " + z
+    end
+
+    x = self.tax
+    y = self.subtotal
+    z = self.total
+
+    puts x
+    puts y
+    puts z
+
+    # @tax = rounding(x)
+    # @subtotal = rounding(y)
+    # @total = rounding(z)
+
+    puts "Sales Taxes: #{@tax}"
+    puts "Total: #{@total}"
   end
 
 end
