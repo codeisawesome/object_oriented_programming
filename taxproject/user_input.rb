@@ -41,25 +41,26 @@ quantity_name_array.each do |x|# quantity_name_array = [["1", "book", "14.55"], 
   array_of_item_instances << Item.new(*x)
 end
 
+# array_of_item_instances.compact
+# puts array_of_item_instances.length
 
-cash_register = Cash_register.new
-
-while i <= array_of_item_instances.length
-  cash_register.add_item(array_of_item_instances[0])
+while i < array_of_item_instances.length
+  cash_register.add_item(array_of_item_instances[i])
+  i += 1
 end
 
-cash_register.subtotal
+# puts cash_register.shopping_cart[0].base_price
 
 # 1 book at 12.45
 # 1 chocolate bar at 23.54
 # 3 imported wine at 24.56
 
 
-# cash_register.subtotal
-#
-# cash_register.tax
-#
-# cash_register.total
+cash_register.subtotal
+
+cash_register.tax
+
+cash_register.total
 
 
 ## Testing to see how it would work to split strings

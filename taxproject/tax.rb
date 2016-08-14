@@ -1,6 +1,4 @@
 class Item
-  # class << self; attr_accessor :all end
-  # @@all = []
 
   attr_accessor :name, :quantity, :base_price
 
@@ -8,7 +6,7 @@ class Item
     @quantity = quantity.to_i
     @name = name.to_s
     @base_price = base_price.to_f
-    # @@all << self
+
   end
 
 end
@@ -16,6 +14,7 @@ end
 
 class Cash_register
 
+  attr_accessor :shopping_cart, :subtotal, :tax 
   def initialize
     @shopping_cart = []
     @subtotal = 0
@@ -23,15 +22,18 @@ class Cash_register
     @rounded_amount = 0
   end
 
+# This method each item into the array @shopping_cart
   def add_item(item)
     @shopping_cart << item
   end
 
+# This method rounds up amounts to nearest 0.05
   def rounding(x)
     @rounded_amount = (x * 20).ceil / 20.0
     puts "$" + sprintf('%.2f', @rounded_amount)
   end
 
+# This method calculates tax depending on if the word imported, bar or box are prsent
   def tax
     @shopping_cart.each do |x|
       if (x.name).include?("imported")
@@ -44,6 +46,7 @@ class Cash_register
     rounding(@tax)
   end
 
+# This method calculates the subtotal
   def subtotal
     @shopping_cart.each do |x|
       @subtotal += x.base_price
@@ -51,6 +54,7 @@ class Cash_register
     rounding(@subtotal)
   end
 
+# This method calculates the total
   def total
      total = @subtotal + @tax
      rounding(total)
