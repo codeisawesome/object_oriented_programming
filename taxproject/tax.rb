@@ -11,7 +11,7 @@ class Item
 end
 
 
-class Cash_register
+class Cash_register < Item
 
 
   attr_accessor :shopping_cart, :subtotal, :tax, :total
@@ -38,10 +38,10 @@ class Cash_register
 # This method calculates tax depending on if the word imported, bar or box are prsent
   def tax
     @shopping_cart.each do |x|
-      if (x.name).include?("imported")
+      if imported(x.name)
         @tax += x.quantity * x.base_price * 0.05
       end
-      unless (x.name).include?("bar") || x.name.include?("box")
+      unless exempt(x.name)
         @tax += x.quantity * x.base_price * 0.10
       end
     end
@@ -58,14 +58,40 @@ class Cash_register
     puts "Total: " + rounding(@total)
   end
 
+# This method figures out item that are imported
+  def imported(str)
+    if str.include?("imported")
+      true
+    end
+  end
+
+# This method figures out item that are exempt
+  def exempt(str)
+    if str.include?("bar") || str.include?("chocolates")  || str.include?("book") || str.include?("pills")
+      true
+    end
+  end
+
+
 # This method prints out a receipt
   def receipt
+
     @shopping_cart.each do |x|
       str_pt_1 = [x.quantity, x.name]*" " + ":"
-      str_pt_2 = x.base_price.to_s
+      tax_portion = 0
+      if imported(x.name)
+        tax_portion = x.quantity * x.base_price * 0.05
+      end
+      unless exempt(x.name)
+        tax_portion += x.quantity * x.base_price * 0.10
+      end
+      tax_plus_base = tax_portion + x.base_price
+      str_pt_2 = rounding(tax_plus_base)
       puts str_pt_1 + " " + str_pt_2
     end
-    s = self.tax #don't know how to run method to self without returning a value to console
-    t = self.total
+
+    t = tax #don't know how to run method to self without returning a value to console
+    s = total
   end
+
 end
